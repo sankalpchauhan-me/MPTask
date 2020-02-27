@@ -8,7 +8,7 @@
 - No third party library (except Retrofit, okHTTP & gson)
 
 ## Apk
-[Apk](https://github.com/sankalpchauhan-me/MPTask/assets/app-debug.apk)
+[Apk](https://github.com/sankalpchauhan-me/MPTask/blob/master/assets/app-debug.apk)
 
 ## Gif
 <p align="center">
