@@ -19,23 +19,23 @@ public class JournalRepository {
         return journalRepository;
     }
 
-    private PLOSSApi newsApi;
+    private PLOSSApi journalApi;
 
     public JournalRepository() {
-        newsApi = RetrofitService.cteateService(PLOSSApi.class);
-        Log.e("Test", newsApi.getResponse("title:DNA").request().url().toString());
+        journalApi = RetrofitService.cteateService(PLOSSApi.class);
+        Log.e("Test", journalApi.getResponse("title:DNA").request().url().toString());
     }
 
     public MutableLiveData<Journal> getJournal(String source) {
         MutableLiveData<Journal> journalData = new MutableLiveData<>();
-        newsApi.getResponse(source).enqueue(new Callback<Journal>() {
+        journalApi.getResponse(source).enqueue(new Callback<Journal>() {
             @Override
             public void onResponse(Call<Journal> call,
                                    Response<Journal> response) {
                 if (response.isSuccessful() && response.code() == 200) {
                     journalData.setValue(response.body());
-                } else{
-                    Log.d("API Request", "Request failed with error" + response.code()+" "+ response.message());
+                } else {
+                    Log.d("API Request", "Request failed with error" + response.code() + " " + response.message());
                 }
             }
 

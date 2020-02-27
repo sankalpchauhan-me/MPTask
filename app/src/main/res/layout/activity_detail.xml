@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.ui.DetailActivity"
     android:orientation="vertical"
-    android:transitionName="Expand">
+    android:id="@+id/parent"
+    >
     <!--<include layout="@layout/action_bar" />-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:transitionName="Expand">
+
     <TextView
         android:id="@+id/article_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Research Article"
+        android:text="@string/lorem_ipsum_small"
        android:layout_margin="10dp"
         android:textColor="@color/colorPrimary"
         android:textStyle="bold"/>
@@ -24,21 +31,21 @@
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
         style="@style/TextAppearance.AppCompat.Large"
-        android:text="Stability of mRNA/DNA and DNA/DNA Duplexes Affects mRNA Transcription"/>
+        android:text="@string/lorem_ipsum_small"/>
 
     <TextView
         android:id="@+id/author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="By Choon Seok Oh, Jean Sippy, Bridget Charbonneau, Jennifer Crow Hutchinson, Olga Esther Mejia-Romero, Michael Barton, Priyal Patel, Rachel Sippy, Michael Feiss"/>
+        android:text="@string/lorem_ipsum_medium"/>
 
     <TextView
         android:id="@+id/tvPublish"
         android:layout_margin="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Plus One 26 Feb 2020"
+        android:text="@string/lorem_ipsum_small"
         android:textStyle="italic"
         />
 
@@ -53,7 +60,7 @@
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:layout_margin="2dp"
-       android:text="EISSN: 1932-6203"
+       android:text="EISSN: eissn"
        />
 
     <androidx.cardview.widget.CardView
@@ -65,6 +72,7 @@
         >
 
         <LinearLayout
+            android:id="@+id/ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -74,10 +82,8 @@
                 android:layout_height="wrap_content"
                 style="@style/TextAppearance.AppCompat.Large"
                 android:textStyle="bold"
-                android:text="Abstract"/>
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:text="@string/abstract_txt"/>
+
             <TextView
                 android:id="@+id/tvAbstract"
                 android:layout_width="match_parent"
@@ -85,9 +91,8 @@
                 android:layout_marginTop="5dp"
                 android:textSize="15sp"
                 android:textColor="#000"
-                android:text="Nucleic acids, due to their structural and chemical properties, can form double-stranded secondary structures that assist the transfer of genetic information and can modulate gene expression. However, the nucleotide sequence alone is insufficient in explaining phenomena like intron-exon recognition during RNA processing. This raises the question whether nucleic acids are endowed with other attributes that can contribute to their biological functions. In this work, we present a calculation of thermodynamic stability of DNA/DNA and mRNA/DNA duplexes across the genomes of four species in the genus Saccharomyces by nearest-neighbor method. The results show that coding regions are more thermodynamically stable than introns, 3′-untranslated regions and intergenic sequences. Furthermore, open reading frames have more stable sense mRNA/DNA duplexes than the potential antisense duplexes, a property that can aid gene discovery. The lower stability of the DNA/DNA and mRNA/DNA duplexes of 3′-untranslated regions and the higher stability of genes correlates with increased mRNA level. These results suggest that the thermodynamic stability of DNA/DNA and mRNA/DNA duplexes affects mRNA transcription."/>
+                android:text="@string/lorem_ipsum_large"/>
 
-            </ScrollView>
         </LinearLayout>
 
 
@@ -95,3 +100,4 @@
 
 
 </LinearLayout>
+</ScrollView>

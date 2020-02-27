@@ -22,9 +22,9 @@ import me.sankalpchauhan.marsplayassignment.service.model.Doc;
 import me.sankalpchauhan.marsplayassignment.view.ui.DetailActivity;
 
 public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.JournalViewHolder> {
-    int mExpandedPosition = -1;
-    Context context;
-    ArrayList<Doc> entries;
+    private int mExpandedPosition = RecyclerView.NO_POSITION;
+    private Context context;
+    private ArrayList<Doc> entries;
 
     public JournalAdapter(Context context, ArrayList<Doc> entries) {
         this.context = context;
@@ -49,6 +49,7 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.JournalV
         holder.tvAuthor.setText(String.format("By %s", listString));
         holder.tvDetails.setText(String.format("%s| %s:%s | Score: %s", entries.get(position).getJournal(), entries.get(position).getPublicationDate(), entries.get(position).getEissn(), entries.get(position).getScore()));
         holder.tvAbstract.setText(entries.get(position).getAbstract().get(0));
+
         final boolean isExpanded = position == mExpandedPosition;
         if (entries.get(position).getArticleType().equals("Correction")) {
             holder.tvAbstract.setVisibility(View.GONE);
@@ -57,6 +58,7 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.JournalV
         }
         holder.btnReadMore.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         holder.itemView.setActivated(isExpanded);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,12 +66,14 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.JournalV
                 notifyItemChanged(position);
             }
         });
+
         holder.btnReadMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, DetailActivity.class);
                 i.putExtra("Entry", entries.get(position));
                 String transitionName = "Expand";
+                //Animation
                 if (context instanceof Activity) {
                     ActivityOptionsCompat options =
                             ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context,
@@ -89,7 +93,7 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.JournalV
         return entries.size();
     }
 
-    public class JournalViewHolder extends RecyclerView.ViewHolder {
+    class JournalViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvTitle, tvAuthor, tvDetails, tvAbstract;
         Button btnReadMore;

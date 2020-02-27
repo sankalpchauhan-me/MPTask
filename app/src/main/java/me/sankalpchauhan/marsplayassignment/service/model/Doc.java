@@ -6,6 +6,9 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Entries in Journal
+ */
 public class Doc implements Serializable {
 
     @SerializedName("id")

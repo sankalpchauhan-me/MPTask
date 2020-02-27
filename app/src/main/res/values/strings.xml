@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Marsplay Assignment</string>
+    <string name="plos_journal">PLOS Journal</string>
+    <string name="no_internet">No Internet</string>
+    <string name="something_wrong">Something Went Wrong...</string>
+    <string name="lorem_ipsum_small">Lorem ipsum dolor sit amet</string>
+    <string name="lorem_ipsum_medium">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce iaculis, magna bibendum congue sagittis, massa.</string>
+    <string name="lorem_ipsum_large">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ullamcorper lacinia sodales. Phasellus commodo neque quam, semper pulvinar felis rhoncus sit amet. Aliquam eleifend scelerisque nulla, non ullamcorper nisl convallis ac. Nam sed diam aliquam dui tincidunt aliquam malesuada eu leo. Nam a mauris iaculis, eleifend libero eget, venenatis nisi. Suspendisse fermentum nibh sed nisl sollicitudin, sed gravida libero semper. Phasellus imperdiet orci et massa suscipit, efficitur finibus purus vestibulum. Sed lobortis eros eget sapien eleifend eleifend ut eget orci. Curabitur eget magna ut enim pharetra vestibulum nec a tortor. Sed ut bibendum nibh, a feugiat leo. Sed quis vulputate tellus, nec bibendum dolor. Phasellus aliquet erat malesuada interdum mattis. Fusce augue nunc, suscipit quis condimentum eu, suscipit in sapien. Vivamus porta vulputate turpis, a varius ipsum bibendum id. Morbi porttitor magna lectus, quis mollis dui lobortis eget.</string>
+    <string name="click_to_retry">Oops Something Went Wrong... Click to Retry</string>
+    <string name="read_more">Read More</string>
+    <string name="abstract_txt">Abstract</string>
 </resources>

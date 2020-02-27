@@ -3,13 +3,7 @@ package me.sankalpchauhan.marsplayassignment.service.repository;
 import android.util.Log;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import okhttp3.Cookie;
-import okhttp3.CookieJar;
-import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -17,7 +11,7 @@ import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
- *     Retry Policy and Logging Request
+ * Retry Policy and Request Logging
  */
 
 class RetryPolicy {
@@ -25,18 +19,6 @@ class RetryPolicy {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient().newBuilder()
-                .cookieJar(new CookieJar() {
-                    @Override
-                    public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
-                    }
-
-                    @Override
-                    public List<Cookie> loadForRequest(HttpUrl url) {
-                        final ArrayList<Cookie> oneCookie = new ArrayList<>(1);
-                        oneCookie.add(createNonPersistentCookie());
-                        return oneCookie;
-                    }
-                })
                 //Retry Policy
                 .addInterceptor(new ErrorInterceptor())
                 //Logging
@@ -53,7 +35,6 @@ class RetryPolicy {
         int maxLimit = 3;
         // wait for 5 second before retrying
         int waitThreshold = 5000;
-
 
         @Override
         public Response intercept(Chain chain) throws IOException {
@@ -84,17 +65,6 @@ class RetryPolicy {
                 return null;
             }
         }
-    }
-
-    private static Cookie createNonPersistentCookie() {
-        return new Cookie.Builder()
-                .domain("api.plos.org")
-                .path("/")
-                .name("token")
-                .value("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwaG9uZSI6ODM2ODgwNTkwM30.sQisPnG7Iorhdp-5i6wLpu4GZtedwaMbXtf2y6kcnEc")
-                .httpOnly()
-                .secure()
-                .build();
     }
 
 
