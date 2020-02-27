@@ -11,6 +11,8 @@
         android:orientation="vertical">
     <TextView
         android:id="@+id/title"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
@@ -27,7 +29,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
+        android:textSize="12sp"
         android:text="Plos One | 26 Feb 2020:1932-6203 | Score: 6.5 "/>
+    <TextView
+        android:id="@+id/tvAbstract"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:maxLines="5"
+        android:ellipsize="end"
+        android:text="Nucleic acids, due to their structural and chemical properties, can form double-stranded secondary structures that assist the transfer of genetic information and can modulate gene expression. However, the nucleotide sequence alone is insufficient in explaining phenomena like intron-exon recognition during RNA processing. This raises the question whether nucleic acids are endowed with other attributes that can contribute to their biological functions. In this work, we present a calculation of thermodynamic stability of DNA/DNA and mRNA/DNA duplexes across the genomes of four species in the genus Saccharomyces by nearest-neighbor method. The results show that coding regions are more thermodynamically stable than introns, 3′-untranslated regions and intergenic sequences. Furthermore, open reading frames have more stable sense mRNA/DNA duplexes than the potential antisense duplexes, a property that can aid gene discovery. The lower stability of the DNA/DNA and mRNA/DNA duplexes of 3′-untranslated regions and the higher stability of genes correlates with increased mRNA level. These results suggest that the thermodynamic stability of DNA/DNA and mRNA/DNA duplexes affects mRNA transcription." />
+        <Button
+            android:id="@+id/read_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="5"
+            android:ellipsize="end"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:text="Read More"
+            />
+            <!--style="@style/Widget.AppCompat.ActionButton.Overflow"-->
+
+
+
+
+
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

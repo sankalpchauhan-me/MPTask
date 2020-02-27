@@ -1,23 +1,32 @@
 package me.sankalpchauhan.marsplayassignment.view.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import me.sankalpchauhan.marsplayassignment.R;
 import me.sankalpchauhan.marsplayassignment.service.model.Doc;
 import me.sankalpchauhan.marsplayassignment.service.model.Journal;
 
 public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.JournalViewHolder> {
-
+    int mExpandedPosition =-1;
     Context context;
     ArrayList<Doc> entries;
 
@@ -42,8 +51,39 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.JournalV
             listString.append(s).append(", ");
         }
         holder.tvTitle.setText(entries.get(position).getTitleDisplay());
-        holder.tvAuthor.setText(listString);
-        holder.tvDetails.setText(entries.get(position).getJournal());
+        holder.tvAuthor.setText(String.format("By %s", listString));
+        //Date date = entries.get(position).getPublicationDate()
+//        String string = entries.get(position).getPublicationDate();
+//        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SS'Z'");
+//        SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
+//        Date date = null;
+//        try {
+//            date = inputFormat.parse(string);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        String formattedDate = outputFormat.format(date);
+        holder.tvDetails.setText(String.format("%s| %s:%s | Score: %s", entries.get(position).getJournal(), entries.get(position).getPublicationDate(), entries.get(position).getEissn(), entries.get(position).getScore()));
+
+        List<String> abstractText = entries.get(position).getAbstract();
+        holder.tvAbstract.setText(abstractText.get(0));
+        final boolean isExpanded = position==mExpandedPosition;
+        holder.tvAbstract.setVisibility(isExpanded?View.VISIBLE:View.GONE);
+        holder.btnReadMore.setVisibility(isExpanded?View.VISIBLE:View.GONE);
+        holder.itemView.setActivated(isExpanded);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mExpandedPosition = isExpanded ? -1:position;
+                notifyItemChanged(position);
+            }
+        });
+        holder.btnReadMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               Log.e("test", "Clicked");
+            }
+        });
     }
 
     @Override
@@ -53,7 +93,8 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.JournalV
 
     public class JournalViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvTitle, tvAuthor, tvDetails;
+        TextView tvTitle, tvAuthor, tvDetails, tvAbstract;
+        Button btnReadMore;
 
         public JournalViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -61,6 +102,8 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.JournalV
             tvTitle = itemView.findViewById(R.id.title);
             tvAuthor = itemView.findViewById(R.id.author);
             tvDetails = itemView.findViewById(R.id.details);
+            tvAbstract = itemView.findViewById(R.id.tvAbstract);
+            btnReadMore = itemView.findViewById(R.id.read_more);
 
         }
     }

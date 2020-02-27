@@ -24,6 +24,7 @@ public class RetrofitService {
         return retrofit.create(serviceClass);
     }
 
+    //For Logging Requests
     private static OkHttpClient okClient(){
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
