@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="2dp"
+    android:layout_margin="2dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:orientation="vertical">
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:text="Stability of mRNA/DNA and DNA/DNA Duplexes Affects mRNA Transcription"/>
+    <TextView
+        android:id="@+id/author"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:text="By Choon Seok Oh, Jean Sippy, Bridget Charbonneau, Jennifer Crow Hutchinson, Olga Esther Mejia-Romero, Michael Barton, Priyal Patel, Rachel Sippy, Michael Feiss"/>
+
+    <TextView
+        android:id="@+id/details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:text="Plos One | 26 Feb 2020:1932-6203 | Score: 6.5 "/>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

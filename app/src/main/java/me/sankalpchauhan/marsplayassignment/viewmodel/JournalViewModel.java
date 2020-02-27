@@ -4,11 +4,12 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import me.sankalpchauhan.marsplayassignment.service.model.Journal;
 import me.sankalpchauhan.marsplayassignment.service.model.JournalResponse;
 import me.sankalpchauhan.marsplayassignment.service.repository.JournalRepository;
 
 public class JournalViewModel extends ViewModel {
-    private MutableLiveData<JournalResponse> mutableLiveData;
+    private MutableLiveData<Journal> mutableLiveData;
     private JournalRepository journalRepository;
 
     public void init(){
@@ -20,7 +21,7 @@ public class JournalViewModel extends ViewModel {
 
     }
 
-    public LiveData<JournalResponse> getNewsRepository() {
+    public LiveData<Journal> getJournalRepository() {
         return mutableLiveData;
     }
 }
