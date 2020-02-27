@@ -2,33 +2,24 @@ package me.sankalpchauhan.marsplayassignment.view.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import me.sankalpchauhan.marsplayassignment.R;
 import me.sankalpchauhan.marsplayassignment.service.model.Doc;
-import me.sankalpchauhan.marsplayassignment.service.model.Journal;
 import me.sankalpchauhan.marsplayassignment.view.ui.DetailActivity;
 
 public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.JournalViewHolder> {
-    int mExpandedPosition =-1;
+    int mExpandedPosition = -1;
     Context context;
     ArrayList<Doc> entries;
 
@@ -41,15 +32,14 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.JournalV
     @Override
     public JournalViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.journal_item, parent, false);
-        return new  JournalViewHolder(view);
+        return new JournalViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull JournalViewHolder holder, int position) {
         List<String> list = entries.get(position).getAuthorDisplay();
-        StringBuilder listString= new StringBuilder();
-        for (String s : list)
-        {
+        StringBuilder listString = new StringBuilder();
+        for (String s : list) {
             listString.append(s).append(", ");
         }
         holder.tvTitle.setText(entries.get(position).getTitleDisplay());
@@ -68,18 +58,18 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.JournalV
         holder.tvDetails.setText(String.format("%s| %s:%s | Score: %s", entries.get(position).getJournal(), entries.get(position).getPublicationDate(), entries.get(position).getEissn(), entries.get(position).getScore()));
 
         holder.tvAbstract.setText(entries.get(position).getAbstract().get(0));
-        final boolean isExpanded = position==mExpandedPosition;
-        if(entries.get(position).getArticleType().equals("Correction")){
+        final boolean isExpanded = position == mExpandedPosition;
+        if (entries.get(position).getArticleType().equals("Correction")) {
             holder.tvAbstract.setVisibility(View.GONE);
-        }else{
-            holder.tvAbstract.setVisibility(isExpanded?View.VISIBLE:View.GONE);
+        } else {
+            holder.tvAbstract.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         }
-        holder.btnReadMore.setVisibility(isExpanded?View.VISIBLE:View.GONE);
+        holder.btnReadMore.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         holder.itemView.setActivated(isExpanded);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mExpandedPosition = isExpanded ? -1:position;
+                mExpandedPosition = isExpanded ? -1 : position;
                 notifyItemChanged(position);
             }
         });

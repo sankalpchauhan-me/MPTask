@@ -23,4 +23,18 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/oops"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Oops Something Went Wrong... Click to Retry"
+        android:textSize="25sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/rvEntry"
+        app:layout_constraintEnd_toEndOf="@+id/rvEntry"
+        app:layout_constraintStart_toStartOf="@+id/rvEntry"
+        app:layout_constraintTop_toTopOf="@+id/rvEntry" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

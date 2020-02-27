@@ -21,9 +21,8 @@ public class DetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Doc entry = (Doc) intent.getSerializableExtra("Entry");
         List<String> list = entry.getAuthorDisplay();
-        StringBuilder listString= new StringBuilder();
-        for (String s : list)
-        {
+        StringBuilder listString = new StringBuilder();
+        for (String s : list) {
             listString.append(s).append(", ");
         }
 

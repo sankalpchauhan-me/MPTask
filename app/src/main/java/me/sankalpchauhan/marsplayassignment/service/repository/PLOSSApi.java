@@ -1,7 +1,6 @@
 package me.sankalpchauhan.marsplayassignment.service.repository;
 
 import me.sankalpchauhan.marsplayassignment.service.model.Journal;
-import me.sankalpchauhan.marsplayassignment.service.model.JournalResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

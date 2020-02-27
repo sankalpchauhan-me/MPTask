@@ -5,15 +5,14 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import me.sankalpchauhan.marsplayassignment.service.model.Journal;
-import me.sankalpchauhan.marsplayassignment.service.model.JournalResponse;
 import me.sankalpchauhan.marsplayassignment.service.repository.JournalRepository;
 
 public class JournalViewModel extends ViewModel {
     private MutableLiveData<Journal> mutableLiveData;
     private JournalRepository journalRepository;
 
-    public void init(){
-        if (mutableLiveData != null){
+    public void init() {
+        if (mutableLiveData != null) {
             return;
         }
         journalRepository = journalRepository.getInstance();

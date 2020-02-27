@@ -6,10 +6,14 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView rvHeadline;
     JournalViewModel journalViewModel;
     ProgressBar progressBar;
+    TextView retryRequest;
+    String retryMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,22 +38,36 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         rvHeadline = findViewById(R.id.rvEntry);
         progressBar = findViewById(R.id.progress_circular);
+        retryRequest = findViewById(R.id.oops);
 
 
         journalViewModel = ViewModelProviders.of(this).get(JournalViewModel.class);
         journalViewModel.init();
         journalViewModel.getJournalRepository().observe(this, journalResponse -> {
             progressBar.setVisibility(View.GONE);
-            if(journalResponse.getResponse().getDocs()!=null) {
+            if (journalResponse != null) {
                 List<Doc> journalEntries = journalResponse.getResponse().getDocs();
                 articleArrayList.addAll(journalEntries);
                 journalAdapter.notifyDataSetChanged();
-
-            }
-            else{
-                Log.e(getLocalClassName(), "Response is null");
+                retryRequest.setVisibility(View.GONE);
+            } else {
+                Log.d(getLocalClassName(), "Response is null");
+                Toast.makeText(this, "Something Went Wrong...", Toast.LENGTH_LONG).show();
+                retryRequest.setVisibility(View.VISIBLE);
             }
         });
+
+        retryRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = getIntent();
+                finishAffinity();
+                finish();
+                Log.d(getLocalClassName(), retryMessage);
+                startActivity(intent);
+            }
+        });
+
         setupRecyclerView();
 
     }
