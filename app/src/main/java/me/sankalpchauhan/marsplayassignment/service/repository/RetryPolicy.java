@@ -51,20 +51,20 @@ class RetryPolicy {
         Response response;
         int tryCount = 0;
         int maxLimit = 3;
+        // wait for 5 second before retrying
         int waitThreshold = 5000;
 
 
         @Override
         public Response intercept(Chain chain) throws IOException {
 
-            // String language =  cacheManager.readPreference(PreferenceKeys.LANGUAGE_CODE);
             Request request = chain.request();
             response = sendReqeust(chain, request);
             while (response == null && tryCount < maxLimit) {
                 Log.d("intercept", "Request failed - " + tryCount);
                 tryCount++;
                 try {
-                    Thread.sleep(waitThreshold); // force wait the network thread for 5 seconds
+                    Thread.sleep(waitThreshold);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

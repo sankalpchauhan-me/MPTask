@@ -1,5 +1,6 @@
 package me.sankalpchauhan.marsplayassignment.view.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -9,6 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -44,19 +47,7 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.JournalV
         }
         holder.tvTitle.setText(entries.get(position).getTitleDisplay());
         holder.tvAuthor.setText(String.format("By %s", listString));
-        //Date date = entries.get(position).getPublicationDate()
-//        String string = entries.get(position).getPublicationDate();
-//        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SS'Z'");
-//        SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
-//        Date date = null;
-//        try {
-//            date = inputFormat.parse(string);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        String formattedDate = outputFormat.format(date);
         holder.tvDetails.setText(String.format("%s| %s:%s | Score: %s", entries.get(position).getJournal(), entries.get(position).getPublicationDate(), entries.get(position).getEissn(), entries.get(position).getScore()));
-
         holder.tvAbstract.setText(entries.get(position).getAbstract().get(0));
         final boolean isExpanded = position == mExpandedPosition;
         if (entries.get(position).getArticleType().equals("Correction")) {
@@ -78,7 +69,17 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.JournalV
             public void onClick(View view) {
                 Intent i = new Intent(context, DetailActivity.class);
                 i.putExtra("Entry", entries.get(position));
-                context.startActivity(i);
+                String transitionName = "Expand";
+                if (context instanceof Activity) {
+                    ActivityOptionsCompat options =
+                            ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context,
+                                    view,
+                                    transitionName
+                            );
+                    ActivityCompat.startActivity(context, i, options.toBundle());
+                } else {
+                    context.startActivity(i);
+                }
             }
         });
     }

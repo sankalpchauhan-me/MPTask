@@ -36,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if(getSupportActionBar()!=null) {
+            getSupportActionBar().setTitle("PLOS Journal");
+        }
         rvHeadline = findViewById(R.id.rvEntry);
         progressBar = findViewById(R.id.progress_circular);
         retryRequest = findViewById(R.id.oops);
@@ -73,8 +76,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView() {
-        Log.e(getLocalClassName(), "I am here");
-
         if (journalAdapter == null) {
             journalAdapter = new JournalAdapter(MainActivity.this, articleArrayList);
             rvHeadline.setLayoutManager(new LinearLayoutManager(this));

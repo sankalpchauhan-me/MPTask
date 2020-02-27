@@ -1,9 +1,11 @@
 package me.sankalpchauhan.marsplayassignment.view.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import java.util.List;
@@ -18,6 +20,11 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        if(getSupportActionBar()!=null) {
+            getSupportActionBar().setTitle("Journal Entry");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
         Intent intent = getIntent();
         Doc entry = (Doc) intent.getSerializableExtra("Entry");
         List<String> list = entry.getAuthorDisplay();
@@ -41,7 +48,23 @@ public class DetailActivity extends AppCompatActivity {
         tvId.setText(String.format("ID: %s", entry.getId()));
         tvEissn.setText(String.format("EISSN: %s", entry.getEissn()));
         tvAbstract.setText(entry.getAbstract().get(0));
+        if(entry.getArticleType().equals("Correction")){
+            tvAbstract.setText(String.format("Correction on %s", entry.getTitleDisplay()));
+        }
+    }
 
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    @Override
+    public void onBackPressed() {
+        ActivityCompat.finishAfterTransition(this);
     }
 }
