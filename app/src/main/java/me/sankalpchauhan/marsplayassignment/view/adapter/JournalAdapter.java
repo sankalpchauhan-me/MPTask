@@ -1,6 +1,7 @@
 package me.sankalpchauhan.marsplayassignment.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ import java.util.Locale;
 import me.sankalpchauhan.marsplayassignment.R;
 import me.sankalpchauhan.marsplayassignment.service.model.Doc;
 import me.sankalpchauhan.marsplayassignment.service.model.Journal;
+import me.sankalpchauhan.marsplayassignment.view.ui.DetailActivity;
 
 public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.JournalViewHolder> {
     int mExpandedPosition =-1;
@@ -65,10 +67,13 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.JournalV
 //        String formattedDate = outputFormat.format(date);
         holder.tvDetails.setText(String.format("%s| %s:%s | Score: %s", entries.get(position).getJournal(), entries.get(position).getPublicationDate(), entries.get(position).getEissn(), entries.get(position).getScore()));
 
-        List<String> abstractText = entries.get(position).getAbstract();
-        holder.tvAbstract.setText(abstractText.get(0));
+        holder.tvAbstract.setText(entries.get(position).getAbstract().get(0));
         final boolean isExpanded = position==mExpandedPosition;
-        holder.tvAbstract.setVisibility(isExpanded?View.VISIBLE:View.GONE);
+        if(entries.get(position).getArticleType().equals("Correction")){
+            holder.tvAbstract.setVisibility(View.GONE);
+        }else{
+            holder.tvAbstract.setVisibility(isExpanded?View.VISIBLE:View.GONE);
+        }
         holder.btnReadMore.setVisibility(isExpanded?View.VISIBLE:View.GONE);
         holder.itemView.setActivated(isExpanded);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +86,9 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.JournalV
         holder.btnReadMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Log.e("test", "Clicked");
+                Intent i = new Intent(context, DetailActivity.class);
+                i.putExtra("Entry", entries.get(position));
+                context.startActivity(i);
             }
         });
     }

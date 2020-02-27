@@ -1,11 +1,12 @@
 
 package me.sankalpchauhan.marsplayassignment.service.model;
 
+import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Doc {
+public class Doc implements Serializable {
 
     @SerializedName("id")
     @Expose

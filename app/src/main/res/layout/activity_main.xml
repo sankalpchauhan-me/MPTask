@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".view.ui.MainActivity">
 
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/rvEntry"
+        app:layout_constraintTop_toTopOf="@+id/rvEntry" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvEntry"
         android:layout_width="match_parent"

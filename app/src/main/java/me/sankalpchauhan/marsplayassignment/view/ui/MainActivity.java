@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,16 +24,20 @@ public class MainActivity extends AppCompatActivity {
     JournalAdapter journalAdapter;
     RecyclerView rvHeadline;
     JournalViewModel journalViewModel;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         rvHeadline = findViewById(R.id.rvEntry);
+        progressBar = findViewById(R.id.progress_circular);
+
 
         journalViewModel = ViewModelProviders.of(this).get(JournalViewModel.class);
         journalViewModel.init();
         journalViewModel.getJournalRepository().observe(this, journalResponse -> {
+            progressBar.setVisibility(View.GONE);
             if(journalResponse.getResponse().getDocs()!=null) {
                 List<Doc> journalEntries = journalResponse.getResponse().getDocs();
                 articleArrayList.addAll(journalEntries);
