@@ -2,6 +2,8 @@ package me.sankalpchauhan.marsplayassignment.view.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +23,7 @@ import java.util.List;
 
 import me.sankalpchauhan.marsplayassignment.R;
 import me.sankalpchauhan.marsplayassignment.service.model.Doc;
+import me.sankalpchauhan.marsplayassignment.service.model.Journal;
 import me.sankalpchauhan.marsplayassignment.util.Utility;
 import me.sankalpchauhan.marsplayassignment.view.adapter.JournalAdapter;
 import me.sankalpchauhan.marsplayassignment.viewmodel.JournalViewModel;
@@ -49,19 +52,22 @@ public class MainActivity extends AppCompatActivity {
         if(!Utility.isConnected(this)){
             Utility.setSnackBar(parentView, getResources().getString(R.string.no_internet));
         }
-        journalViewModel = ViewModelProviders.of(this).get(JournalViewModel.class);
+        journalViewModel = new ViewModelProvider(this).get(JournalViewModel.class);
         journalViewModel.init();
-        journalViewModel.getJournalRepository().observe(this, journalResponse -> {
-            progressBar.setVisibility(View.GONE);
-            if (journalResponse != null) {
-                List<Doc> journalEntries = journalResponse.getResponse().getDocs();
-                articleArrayList.addAll(journalEntries);
-                journalAdapter.notifyDataSetChanged();
-                retryRequest.setVisibility(View.GONE);
-            } else {
-                Log.d(getLocalClassName(), "Response is null");
-                Toast.makeText(this, getResources().getString(R.string.something_wrong), Toast.LENGTH_LONG).show();
-                retryRequest.setVisibility(View.VISIBLE);
+        journalViewModel.getJournalRepository().observe(this, new Observer<Journal>() {
+            @Override
+            public void onChanged(Journal journalResponse) {
+                progressBar.setVisibility(View.GONE);
+                if (journalResponse != null) {
+                    List<Doc> journalEntries = journalResponse.getResponse().getDocs();
+                    articleArrayList.addAll(journalEntries);
+                    journalAdapter.notifyDataSetChanged();
+                    retryRequest.setVisibility(View.GONE);
+                } else {
+                    Log.d(getLocalClassName(), "Response is null");
+                    Toast.makeText(MainActivity.this, getResources().getString(R.string.something_wrong), Toast.LENGTH_LONG).show();
+                    retryRequest.setVisibility(View.VISIBLE);
+                }
             }
         });
 

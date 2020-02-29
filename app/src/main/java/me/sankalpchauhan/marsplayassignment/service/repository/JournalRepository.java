@@ -23,7 +23,7 @@ public class JournalRepository {
 
     public JournalRepository() {
         journalApi = RetrofitService.cteateService(PLOSSApi.class);
-        Log.e("Test", journalApi.getResponse("title:DNA").request().url().toString());
+        //Log.i("Test", journalApi.getResponse("title:DNA").request().url().toString());
     }
 
     public MutableLiveData<Journal> getJournal(String source) {
